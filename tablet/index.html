@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07131d">
+  <title>iPad 語音控制 LED</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">VIBE CODING × AMB82-MINI</p>
+      <h1>iPad 語音控制 LED</h1>
+      <p class="subtitle">iPad 直接語音辨識，透過私人 HTTPS 與 COM4 控制開發板。</p>
+      <div class="bonus-strip">加分功能：閃爍三次 · 中英文指令 · 語音回覆 · 自訂介面</div>
+    </header>
+
+    <section class="panel">
+      <div class="step-title"><span>1</span><h2>確認電腦橋接</h2></div>
+      <p>AMB82-MINI 要用 USB 接在電腦；電腦與 iPad 的 Tailscale 都要保持連線。</p>
+      <div id="connectionStatus" class="status waiting">正在檢查開發板…</div>
+      <button id="refreshButton" class="secondary" type="button">重新讀取板端狀態</button>
+    </section>
+
+    <section class="panel">
+      <div class="step-title"><span>2</span><h2>用 iPad 說出指令</h2></div>
+      <ol class="instructions">
+        <li>按「開始語音辨識」並允許麥克風權限。</li>
+        <li>選擇中文或 English，再按「開始語音辨識」。</li>
+        <li>說「左邊開燈」、「右邊開燈」或「閃爍三次」。</li>
+        <li>辨識完成後會自動送出，不需要打字。</li>
+      </ol>
+      <label for="recognitionLanguage">語音語言</label>
+      <select id="recognitionLanguage">
+        <option value="zh-TW">中文（繁體）</option>
+        <option value="en-US">English (US)</option>
+      </select>
+      <button id="voiceButton" class="primary voice-button" type="button">🎤 開始語音辨識</button>
+      <label for="speechInput">辨識文字（唯讀）</label>
+      <input id="speechInput" type="text" readonly placeholder="語音辨識結果會顯示在這裡">
+      <div class="result-grid">
+        <div><small>轉換指令</small><strong id="commandResult">尚未送出</strong></div>
+        <div><small>執行結果</small><strong id="executionResult">等待操作</strong></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="step-title"><span>3</span><h2>開發板回傳狀態</h2></div>
+      <p>只有收到 AMB82-MINI 回覆後，才更新下方狀態。</p>
+      <div class="led-grid">
+        <article id="blueCard" class="led-card unknown">
+          <i aria-hidden="true"></i><div><small>左邊 · 藍燈</small><strong id="blueState">未知</strong></div>
+        </article>
+        <article id="greenCard" class="led-card unknown">
+          <i aria-hidden="true"></i><div><small>右邊 · 綠燈</small><strong id="greenState">未知</strong></div>
+        </article>
+      </div>
+    </section>
+
+    <details class="panel tools">
+      <summary>測試與除錯工具</summary>
+      <p>以下按鈕僅用來分開驗證傳輸與 LED，不列入語音驗收。</p>
+      <div class="tool-row">
+        <button id="leftButton" class="secondary" type="button">測試左邊開燈</button>
+        <button id="rightButton" class="secondary" type="button">測試右邊開燈</button>
+        <button id="blinkButton" class="secondary" type="button">測試閃爍三次</button>
+      </div>
+      <h3>事件紀錄</h3>
+      <ul id="eventLog" class="log"></ul>
+    </details>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

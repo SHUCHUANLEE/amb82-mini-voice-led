@@ -1,0 +1,5 @@
+tablet/.bridge.pid
+tablet/.bridge.log
+tablet/.bridge-error.log
+__pycache__/
+*.pyc

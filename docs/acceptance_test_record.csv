@@ -1,0 +1,16 @@
+測試編號,測試類型,說出的語句,語音辨識結果,預期指令,板端回覆,藍燈實際反應,綠燈實際反應,結果,備註
+L1,左邊開燈,左邊開燈,左邊開燈,LEFT_ON,ACK|LEFT_ON|BLUE=1|GREEN=0,亮,滅,通過,2026-09-30 iPad Safari 固定 HTTPS 實測
+L2,左邊開燈,左邊開燈,,LEFT_ON,,,,待測,
+L3,左邊開燈,左邊開燈,,LEFT_ON,,,,待測,
+L4,左邊開燈,左邊開燈,,LEFT_ON,,,,待測,
+L5,左邊開燈,左邊開燈,,LEFT_ON,,,,待測,
+R1,右邊開燈,右邊開燈,右邊開燈,RIGHT_ON,ACK|RIGHT_ON|BLUE=0|GREEN=1,滅,亮,通過,2026-09-30 iPad Safari 固定 HTTPS 實測
+R2,右邊開燈,右邊開燈,,RIGHT_ON,,,,待測,
+R3,右邊開燈,右邊開燈,,RIGHT_ON,,,,待測,
+R4,右邊開燈,右邊開燈,,RIGHT_ON,,,,待測,
+R5,右邊開燈,右邊開燈,,RIGHT_ON,,,,待測,
+E1,非控制語句,不要開燈,不要開燈,不傳送,無（網頁未傳送 Serial）,狀態不變,狀態不變,通過,畫面顯示「非控制指令（未傳送）」
+E2,通訊中斷,右邊開燈,,傳送失敗,,,,待測,拔除 USB 後應顯示通訊中斷
+B1,加分功能,閃爍三次,閃爍三次,BLINK_3,ACK|BLINK_3|BLUE=0|GREEN=0,閃三次後滅,閃三次後滅,通過,橋接與板端實測成功；iPad 語音仍須確認
+B2,英文指令,turn on left light,turn on left light,LEFT_ON,ACK|LEFT_ON|BLUE=1|GREEN=0,亮,滅,部分通過,英文白名單與板端實測成功；iPad 英文語音仍須確認
+B3,語音回覆,右邊開燈,,RIGHT_ON,,,,待測,iPad 應朗讀執行結果

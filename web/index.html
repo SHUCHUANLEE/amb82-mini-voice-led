@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ameba Mini 語音控制 LED</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="hero">
+        <p class="eyebrow">Vibe Coding × AMB82-MINI</p>
+        <h1>語音控制 LED 系統</h1>
+        <p>說「左邊開燈」控制藍燈，說「右邊開燈」控制綠燈。</p>
+      </header>
+
+      <section class="panel connection-panel" aria-labelledby="connection-title">
+        <div>
+          <h2 id="connection-title">1. 連接開發板</h2>
+          <p class="hint">使用 Chrome 或 Edge，並先關閉 Arduino IDE 的序列埠監控視窗。</p>
+        </div>
+        <div class="button-row">
+          <button id="connectButton" class="button primary">連接 Serial</button>
+          <button id="disconnectButton" class="button secondary" disabled>中斷連線</button>
+        </div>
+        <p id="connectionStatus" class="status warning" role="status">尚未連接</p>
+      </section>
+
+      <section class="panel" aria-labelledby="voice-title">
+        <div>
+          <h2 id="voice-title">2. 語音控制</h2>
+          <p class="hint">一次說一個完整指令；非控制語句不會送到開發板。</p>
+        </div>
+        <button id="listenButton" class="button voice" disabled>開始語音辨識</button>
+
+        <div class="result-grid">
+          <article class="result-card">
+            <span>辨識文字</span>
+            <strong id="transcriptResult">尚未辨識</strong>
+          </article>
+          <article class="result-card">
+            <span>轉換指令</span>
+            <strong id="commandResult">—</strong>
+          </article>
+          <article class="result-card wide">
+            <span>執行結果</span>
+            <strong id="executionResult">等待操作</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="led-title">
+        <div>
+          <h2 id="led-title">3. 開發板回傳狀態</h2>
+          <p class="hint">只有收到 AMB82-MINI 的回覆後，才會更新下方狀態。</p>
+        </div>
+        <div class="led-grid">
+          <article id="blueLedCard" class="led-card blue unknown">
+            <span class="led-dot" aria-hidden="true"></span>
+            <div><span>左邊・藍燈</span><strong id="blueLedState">未知</strong></div>
+          </article>
+          <article id="greenLedCard" class="led-card green unknown">
+            <span class="led-dot" aria-hidden="true"></span>
+            <div><span>右邊・綠燈</span><strong id="greenLedState">未知</strong></div>
+          </article>
+        </div>
+      </section>
+
+      <details class="panel debug-panel">
+        <summary>測試與除錯工具</summary>
+        <p class="hint">可先不用語音，分別驗證 Serial 傳輸與板端 LED 控制。</p>
+        <div class="button-row">
+          <button id="testLeftButton" class="button secondary command-button" disabled>測試左邊開燈</button>
+          <button id="testRightButton" class="button secondary command-button" disabled>測試右邊開燈</button>
+          <button id="refreshStatusButton" class="button secondary command-button" disabled>讀取板端狀態</button>
+        </div>
+        <div class="log-header">
+          <h2>事件紀錄</h2>
+          <button id="clearLogButton" class="text-button">清除</button>
+        </div>
+        <ol id="eventLog" class="event-log" aria-live="polite"></ol>
+      </details>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
